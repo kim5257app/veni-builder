@@ -14,8 +14,8 @@ services:
   api:
     image: veni-api
     volumes:
-      - /home/master/nfs/cnslink-ami-api/config:/app/config
-      - /home/master/nfs/cnslink-ami-api/upload:/app/upload
+      - /home/master/nfs/veni-api/config:/app/config
+      - /home/master/nfs/veni-api/upload:/app/upload
     networks:
       - backend
   db:
