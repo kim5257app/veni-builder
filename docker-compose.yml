@@ -1,0 +1,41 @@
+version: '3'
+services:
+  nginx:
+    image: veni-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /home/master/nfs/veni-nginx/conf.d:/etc/nginx/conf.d
+      - /home/master/nfs/veni-nginx/htdocs:/usr/share/nginx/html
+      - /home/master/nfs/veni-api/upload:/usr/share/nginx/html/upload
+    networks:
+      - backend
+  api:
+    image: veni-api
+    networks:
+      - backend
+  db:
+    image: mariadb
+    ports:
+      - "3306:3306"
+    volumes:
+      - /home/master/nfs/veni-db/data:/var/lib/mysql
+      - /home/master/nfs/veni-db/conf:/etc/mysql/conf.d
+    env_file:
+      - ./db.env
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_bin
+      --event-scheduler=ON
+      --max-connections=500
+    networks:
+      - backend
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+networks:
+  backend:
