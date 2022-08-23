@@ -8,6 +8,7 @@ services:
     volumes:
       - /home/master/nfs/veni-nginx/conf.d:/etc/nginx/conf.d
       - /home/master/nfs/veni-nginx/htdocs:/usr/share/nginx/html
+      - /home/master/nfs/veni-nginx/cert:/cert
       - /home/master/nfs/veni-api/upload:/usr/share/nginx/html/upload
     networks:
       - backend
