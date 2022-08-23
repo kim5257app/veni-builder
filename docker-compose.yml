@@ -35,7 +35,7 @@ services:
     networks:
       - backend
   redis:
-    image: redis
+    image: veni-redis
     ports:
       - "6379:6379"
     networks:
